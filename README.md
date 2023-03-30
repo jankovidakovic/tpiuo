@@ -1,0 +1,3 @@
+- **First name:** Janko
+- **Last name:** Vidakovic
+- **Email:** janko.vidakovic@fer.hr
