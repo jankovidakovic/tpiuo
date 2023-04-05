@@ -44,6 +44,11 @@ services:
     depends_on:
       - kafka1
 
+  consumer:
+    build: ./consumer
+    depends_on:
+      - kafka1
+
 networks:
   kafka_network:
     driver: bridge

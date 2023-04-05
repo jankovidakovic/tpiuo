@@ -15,7 +15,7 @@ func main() {
 
 	// now we want to initialize a consumer
 	consumer, err := kafka.NewConsumer(&kafka.ConfigMap{
-		"bootstrap.servers": "127.0.0.1:9092",
+		"bootstrap.servers": "kafka1:19092",
 		"group.id":          "bitcoin",
 		"auto.offset.reset": "earliest"})
 
