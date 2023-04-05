@@ -13,6 +13,8 @@ services:
     volumes:
       - ./zk-single-kafka-single/zoo1/data:/data
       - ./zk-single-kafka-single/zoo1/datalog:/datalog
+    networks:
+      - kafka_network
 
   kafka1:
     image: confluentinc/cp-kafka:5.5.0
@@ -31,6 +33,8 @@ services:
       - ./zk-single-kafka-single/kafka1/data:/var/lib/kafka/data
     depends_on:
       - zoo1
+    networks:
+      - kafka_network
 
   kowl:
     image: quay.io/cloudhut/kowl:v1.2.1
@@ -43,11 +47,22 @@ services:
     entrypoint: ./kowl --config.filepath=/etc/kowl/config.yaml
     depends_on:
       - kafka1
+    networks:
+      - kafka_network
 
   consumer:
     build: ./consumer
     depends_on:
       - kafka1
+    networks:
+      - kafka_network
+
+  producer:
+    build: ./producer
+    depends_on:
+      - kafka1
+    networks:
+      - kafka_network
 
 networks:
   kafka_network:
